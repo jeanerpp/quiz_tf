@@ -119,4 +119,6 @@ module "data" {
   tags     = var.config.tags
   data_subnet_ids = values(local.data_subnet_ids)
   data_sg_id = aws_security_group.db_sg.id
+  db_username = var.config.db.username
+  db_password = var.config.db.password
 }

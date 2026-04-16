@@ -12,3 +12,13 @@ variable "data_sg_id" {
   type = string
   description = "Security Group ID for the data instances"
 }
+
+variable "db_username" {
+  type = string
+  description = "Username for the RDS database"
+}
+
+variable "db_password" {
+  type = string
+  description = "Password for the RDS database"
+}

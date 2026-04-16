@@ -17,6 +17,10 @@ variable "config" {
       name_prefix = string
       count       = number
     })
+    db = object({
+      username = string
+      password = string
+    })
   })
   description = "Configuration for the deployment"
 }
