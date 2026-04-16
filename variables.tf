@@ -7,17 +7,15 @@ variable "config" {
       enable_dns_support   = bool
       enable_dns_hostnames = bool
     })
-    public-net = object({
-      subnet_cidr_block = string
+    azs = list(object({
       availability_zone = string
-    })
-    control-net = object({
-      subnet_cidr_block = string
-      availability_zone = string
-    })
-    data-net = object({
-      subnet_cidr_block = string
-      availability_zone = string
+      public_subnet_cidr = string
+      control_subnet_cidr = string
+      data_subnet_cidr = string
+    }))
+    ec2 = object({
+      name_prefix = string
+      count       = number
     })
   })
   description = "Configuration for the deployment"
