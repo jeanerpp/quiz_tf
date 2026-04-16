@@ -27,11 +27,6 @@ variable control_subnet_ids {
   description = "List of control subnet IDs for the computing module"
 }
 
-variable data_subnet_ids {
-  type = list(string)
-  description = "List of data subnet IDs for the computing module"
-}
-
 variable "alb_sg_id" {
   type = string
   description = "Security Group ID for the ALB"

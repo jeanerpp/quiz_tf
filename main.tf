@@ -108,8 +108,15 @@ module "computing" {
   igw_id   = aws_internet_gateway.igw.id
   public_subnet_ids = values(local.public_subnet_ids)
   control_subnet_ids = values(local.control_subnet_ids)
-  data_subnet_ids = values(local.data_subnet_ids)
   ami_name_filter = "ubuntu-*-amd64-server-*"
   alb_sg_id = aws_security_group.alb_sg.id
   app_sg_id = aws_security_group.app_sg.id
+}
+
+module "data" {
+  source   = "./modules/data"
+
+  tags     = var.config.tags
+  data_subnet_ids = values(local.data_subnet_ids)
+  data_sg_id = aws_security_group.db_sg.id
 }
