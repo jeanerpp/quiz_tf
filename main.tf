@@ -100,6 +100,17 @@ locals {
 }
 
 
+module "data" {
+  source   = "./modules/data"
+
+  tags     = var.config.tags
+  data_subnet_ids = values(local.data_subnet_ids)
+  data_sg_id = aws_security_group.db_sg.id
+  db_username = var.config.db.username
+  db_password = var.config.db.password
+}
+
+
 module "computing" {
   source   = "./modules/computing"
 
@@ -113,12 +124,7 @@ module "computing" {
   app_sg_id = aws_security_group.app_sg.id
 }
 
-module "data" {
-  source   = "./modules/data"
 
-  tags     = var.config.tags
-  data_subnet_ids = values(local.data_subnet_ids)
-  data_sg_id = aws_security_group.db_sg.id
-  db_username = var.config.db.username
-  db_password = var.config.db.password
+output "app_lb_url" {
+  value = "http://${module.computing.app_lb_dns}"
 }
