@@ -61,6 +61,17 @@ resource "aws_launch_template" "app_lt" {
   instance_type = var.ec2_instance_type
   vpc_security_group_ids = [var.app_sg_id]
 
+  
+  # User data script to install nginx
+  user_data = base64encode(<<-EOF
+    #!/bin/bash
+    apt-get update -y
+    apt-get install -y nginx
+    systemctl start nginx
+    systemctl enable nginx
+    EOF
+  )
+
   tags = var.tags
 }
 
