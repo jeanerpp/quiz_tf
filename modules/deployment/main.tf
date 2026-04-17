@@ -80,7 +80,10 @@ module "networking" {
   vpc_id   = aws_vpc.vpc.id
   igw_id   = aws_internet_gateway.igw.id
   for_each = { for az in var.config.azs : az.availability_zone => az }
-  az       = each.value
+  availability_zone   = each.value.availability_zone
+  public_subnet_cidr  = each.value.public_subnet_cidr
+  control_subnet_cidr = each.value.control_subnet_cidr
+  data_subnet_cidr    = each.value.data_subnet_cidr
 }
 
 locals {

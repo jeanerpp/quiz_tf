@@ -16,13 +16,26 @@ variable "igw_id" {
   description = "IGW ID for the network deployment"
 }
 
-variable "az" {
-  # Subnet CIDR plan for one availability zone.
-  type = object({
-    availability_zone = string
-    public_subnet_cidr = string
-    control_subnet_cidr = string
-    data_subnet_cidr = string
-  })
-  description = "Configuration for networking module"
+variable availability_zone {
+  # Availability zones for the network deployment
+  type = string
+  description = "Availability zones for the network deployment"
+}
+
+variable "public_subnet_cidr" {
+  # CIDR block for the public subnet in the availability zone.
+  type = string
+  description = "Public subnet cidr of the availability zone"
+}
+
+variable "control_subnet_cidr" {
+  # CIDR block for the control subnet in the availability zone.
+  type = string
+  description = "Control subnet cidr of the availability zone"
+}
+
+variable "data_subnet_cidr" {
+  # CIDR block for the data subnet in the availability zone.
+  type = string
+  description = "Data subnet cidr of the availability zone"
 }

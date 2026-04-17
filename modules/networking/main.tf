@@ -2,8 +2,8 @@
 resource "aws_subnet" "public_subnet" {
   vpc_id = var.vpc_id
 
-  cidr_block = var.az.public_subnet_cidr
-  availability_zone = var.az.availability_zone
+  cidr_block = var.public_subnet_cidr
+  availability_zone = var.availability_zone
   map_public_ip_on_launch = false  # only NAT Gateway will be in public subnet, so disable public IP assignment
 
   tags = var.tags
@@ -13,8 +13,8 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "control_subnet" {
     vpc_id = var.vpc_id
 
-    cidr_block = var.az.control_subnet_cidr
-    availability_zone = var.az.availability_zone
+    cidr_block = var.control_subnet_cidr
+    availability_zone = var.availability_zone
 
     tags = var.tags
 }
@@ -23,8 +23,8 @@ resource "aws_subnet" "control_subnet" {
 resource "aws_subnet" "data_subnet" {
     vpc_id = var.vpc_id
 
-    cidr_block = var.az.data_subnet_cidr
-    availability_zone = var.az.availability_zone
+    cidr_block = var.data_subnet_cidr
+    availability_zone = var.availability_zone
 
     tags = var.tags
 }
