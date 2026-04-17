@@ -24,14 +24,21 @@ variable "config" {
 
     # EC2 naming and count settings.
     ec2 = object({
-      name_prefix = string
-      count       = number
+      ami_name_filter = string
+      ec2_instance_type = string
+      asg_desired_capacity = number
+      asg_min_size = number
+      asg_max_size = number
     })
 
     # Database credentials for the data module.
     db = object({
       username = string
       password = string
+      instance_class = string
+      allocated_storage = number
+      storage_type = string
+      skip_final_snapshot = string
     })
   })
   description = "Configuration for the deployment"

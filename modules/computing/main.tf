@@ -1,4 +1,4 @@
-# Get the latest Amazon OS AMI
+# Get the latest Amazon OS AMI for the given name filter
 data "aws_ami" "app_ami" {
   most_recent = true
   owners      = ["amazon"]
@@ -58,7 +58,7 @@ resource "aws_lb_listener" "app_http" {
 resource "aws_launch_template" "app_lt" {
   name          = "app-lt"
   image_id      = data.aws_ami.app_ami.id
-  instance_type = "t2.micro"
+  instance_type = var.ec2_instance_type
   vpc_security_group_ids = [var.app_sg_id]
 
   tags = var.tags
@@ -67,9 +67,9 @@ resource "aws_launch_template" "app_lt" {
 # Create Auto Scaling Group for application servers and bind to ALB Target Group
 resource "aws_autoscaling_group" "app_asg" {
   name                 = "app-asg"
-  min_size             = 2
-  max_size             = 2
-  desired_capacity     = 2
+  min_size             = var.asg_min_size
+  max_size             = var.asg_max_size
+  desired_capacity     = var.asg_desired_capacity
   vpc_zone_identifier  = var.control_subnet_ids
   target_group_arns    = [aws_lb_target_group.app_tg.arn]
 

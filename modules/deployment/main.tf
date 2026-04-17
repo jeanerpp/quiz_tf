@@ -107,6 +107,10 @@ module "data" {
   data_sg_id = aws_security_group.db_sg.id
   db_username = var.config.db.username
   db_password = var.config.db.password
+  storage_type = var.config.db.storage_type
+  allocated_storage = var.config.db.allocated_storage
+  instance_class = var.config.db.instance_class
+  skip_final_snapshot = var.config.db.skip_final_snapshot
 }
 
 
@@ -118,9 +122,14 @@ module "computing" {
   igw_id   = aws_internet_gateway.igw.id
   public_subnet_ids = values(local.public_subnet_ids)
   control_subnet_ids = values(local.control_subnet_ids)
-  ami_name_filter = "ubuntu-*-amd64-server-*"
   alb_sg_id = aws_security_group.alb_sg.id
   app_sg_id = aws_security_group.app_sg.id
+
+  ami_name_filter = var.config.ec2.ami_name_filter
+  ec2_instance_type = var.config.ec2.ec2_instance_type
+  asg_desired_capacity = var.config.ec2.asg_desired_capacity
+  asg_min_size = var.config.ec2.asg_min_size
+  asg_max_size = var.config.ec2.asg_max_size
 }
 
 

@@ -27,3 +27,27 @@ variable "db_password" {
   type = string
   description = "Password for the RDS database"
 }
+
+variable "instance_class" {
+  # Instance class for the database instance.
+  type = string
+  description = "Instance class for the RDS database"
+}
+
+variable "allocated_storage" {
+  # Allocated storage in GB for the database instance.
+  type = number
+  description = "Allocated storage (GB) for the RDS database"
+}
+
+variable "storage_type" {
+  # Storage type for the database instance.
+  type = string
+  description = "Storage type for the RDS database"
+}
+
+variable "skip_final_snapshot" {
+  # Whether to skip final snapshot when deleting the database instance.
+  type = string
+  description = "Whether skip DB snapshot"
+}

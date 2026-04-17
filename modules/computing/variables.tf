@@ -44,3 +44,27 @@ variable "app_sg_id" {
   type = string
   description = "Security Group ID for the application instances"
 }
+
+variable "ec2_instance_type" {
+  # EC2 instance type for application servers.
+  type = string
+  description = "Instance type for the EC2 instances"
+}
+
+variable "asg_desired_capacity" {
+  # Desired number of EC2 instances in the Auto Scaling Group.
+  type = number
+  description = "Desired capacity of the Auto Scaling Group"
+}
+
+variable "asg_min_size" {
+  # Minimum number of EC2 instances in the Auto Scaling Group.
+  type = number
+  description = "Minimum size of the Auto Scaling Group"
+}
+
+variable "asg_max_size" {
+  # Maximum number of EC2 instances in the Auto Scaling Group.
+  type = number
+  description = "Maximum size of the Auto Scaling Group"
+}
