@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.config.region
-}
-
 resource "aws_vpc" "vpc" {
     cidr_block = var.config.vpc.cidr_block
     enable_dns_support = var.config.vpc.enable_dns_support
@@ -78,7 +74,7 @@ resource "aws_security_group" "db_sg" {
 
 
 module "networking" {
-  source   = "./modules/networking"
+  source   = "../networking"
 
   tags     = var.config.tags
   vpc_id   = aws_vpc.vpc.id
@@ -101,7 +97,7 @@ locals {
 
 
 module "data" {
-  source   = "./modules/data"
+  source   = "../data"
 
   tags     = var.config.tags
   data_subnet_ids = values(local.data_subnet_ids)
@@ -112,7 +108,7 @@ module "data" {
 
 
 module "computing" {
-  source   = "./modules/computing"
+  source   = "../computing"
 
   tags     = var.config.tags
   vpc_id   = aws_vpc.vpc.id
