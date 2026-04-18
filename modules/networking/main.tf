@@ -67,6 +67,13 @@ resource "aws_route_table" "private_route_table" {
   tags = var.tags
 }
 
+# Routing for peering VPC
+resource "aws_route" "to_peer_vpc" {
+  route_table_id            = aws_route_table.private_route_table.id
+  destination_cidr_block    = var.vpc_destination_cidr_block
+  vpc_peering_connection_id = var.vpc_peering_connection_id
+}
+
 # Public subnet use IGW for internet
 resource "aws_route_table_association" "public_subnet_assoc" {
   subnet_id      = aws_subnet.public_subnet.id

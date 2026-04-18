@@ -39,3 +39,15 @@ variable "data_subnet_cidr" {
   type = string
   description = "Data subnet cidr of the availability zone"
 }
+
+variable "vpc_peering_connection_id" {
+  # VPC peering connection ID
+  type = string
+  description = "VPC peering connection id"
+}
+
+variable "vpc_destination_cidr_block" {
+  # VPC peering destination cidr
+  type = string
+  description = "VPC peering destination cidr"
+}

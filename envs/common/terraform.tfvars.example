@@ -10,6 +10,9 @@ config = {
         cidr_block = "10.0.0.0/16"
         enable_dns_support = true
         enable_dns_hostnames = true
+        peer_vpc_id = "vpc-09f65a9171dbc2152"
+        peer_vpc_cidr = "172.31.32.0/20"
+        peer_vpc_route_table_id = "rtb-070bb9e9616fefad4"
     }
     azs = [
             {
@@ -31,13 +34,16 @@ config = {
         asg_desired_capacity = 2
         asg_min_size = 2
         asg_max_size = 2
+        ssh_key_name = "bastion"
     }
     db = {
-        username = "foo"
-        password = "bar"
+        username = "admin"
+        password = "password123"
         instance_class = "db.t3.micro"
         allocated_storage = 20
         storage_type = "gp3"
         skip_final_snapshot = "true"
     }
+
+    bastion_sg_id = "sg-0d25d045761815615"
 }

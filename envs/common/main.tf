@@ -9,6 +9,36 @@ resource "aws_vpc" "vpc" {
     tags = var.config.tags
 }
 
+# Create peering VPC connection so that bastion EC2 can connnect in
+resource "aws_vpc_peering_connection" "this_to_bastion" {
+  vpc_id        = aws_vpc.vpc.id
+  peer_vpc_id   = var.config.vpc.peer_vpc_id
+  auto_accept   = true
+
+  tags = merge(var.config.tags, {
+    Name = "peering-to-bastion"
+  })
+}
+
+# Enable DNS resolving of peering VPC
+resource "aws_vpc_peering_connection_options" "peering_dns" {
+  vpc_peering_connection_id = aws_vpc_peering_connection.this_to_bastion.id
+
+  requester {
+    allow_remote_vpc_dns_resolution = true
+  }
+  accepter {
+    allow_remote_vpc_dns_resolution = true
+  }
+}
+
+# Route to allow bastion to reach this VPC via peering connection
+resource "aws_route" "bastion_to_this_vpc" {
+  route_table_id          = var.config.vpc.peer_vpc_route_table_id
+  destination_cidr_block  = var.config.vpc.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.this_to_bastion.id
+}
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
   tags = var.config.tags
@@ -48,13 +78,13 @@ resource "aws_security_group" "app_sg" {
     description     = "Allow HTTP from ALB"
   }
 
-  # ingress {
-  #   from_port       = 22
-  #   to_port         = 22
-  #   protocol        = "tcp"
-  #   security_groups = [var.config.bastion_sg_id]
-  #   description     = "Allow SSH from bastion"
-  # }
+  ingress {
+    from_port       = 0
+    to_port         = 22
+    protocol        = "tcp"
+    cidr_blocks     = [var.config.vpc.peer_vpc_cidr]
+    description     = "Allow SSH from bastion"
+  }
 
   egress {
     from_port   = 0
@@ -97,6 +127,8 @@ module "networking" {
   public_subnet_cidr  = each.value.public_subnet_cidr
   control_subnet_cidr = each.value.control_subnet_cidr
   data_subnet_cidr    = each.value.data_subnet_cidr
+  vpc_destination_cidr_block = var.config.vpc.peer_vpc_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.this_to_bastion.id
 }
 
 locals {

@@ -12,6 +12,9 @@ variable "config" {
       cidr_block           = string
       enable_dns_support   = bool
       enable_dns_hostnames = bool
+      peer_vpc_id          = string
+      peer_vpc_cidr        = string
+      peer_vpc_route_table_id = string
     })
 
     # Availability-zone subnet layout consumed by networking and compute.
