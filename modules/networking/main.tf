@@ -55,23 +55,23 @@ resource "aws_route_table" "public_route_table" {
   tags = var.tags
 }
 
-# Routing table to NAT Gateway
+# Routing table for private subnets with NAT Gateway and peering routes
 resource "aws_route_table" "private_route_table" {
   vpc_id = var.vpc_id
 
+  # Default route for internet access via NAT Gateway
   route {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat_gateway.id
   }
 
-  tags = var.tags
-}
+  # Route for peering VPC
+  route {
+    cidr_block    = var.vpc_destination_cidr_block
+    vpc_peering_connection_id = var.vpc_peering_connection_id
+  }
 
-# Routing for peering VPC
-resource "aws_route" "to_peer_vpc" {
-  route_table_id            = aws_route_table.private_route_table.id
-  destination_cidr_block    = var.vpc_destination_cidr_block
-  vpc_peering_connection_id = var.vpc_peering_connection_id
+  tags = var.tags
 }
 
 # Public subnet use IGW for internet

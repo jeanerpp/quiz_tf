@@ -12,6 +12,7 @@ variable "config" {
       cidr_block           = string
       enable_dns_support   = bool
       enable_dns_hostnames = bool
+      # TODO: query all these out with a given bastion EC2 ID.
       peer_vpc_id          = string
       peer_vpc_cidr        = string
       peer_vpc_route_table_id = string
@@ -44,8 +45,6 @@ variable "config" {
       storage_type = string
       skip_final_snapshot = string
     })
-
-    bastion_sg_id = string
   })
   description = "Configuration for the deployment"
 }

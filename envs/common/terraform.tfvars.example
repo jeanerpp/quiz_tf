@@ -11,7 +11,7 @@ config = {
         enable_dns_support = true
         enable_dns_hostnames = true
         peer_vpc_id = "vpc-09f65a9171dbc2152"
-        peer_vpc_cidr = "172.31.32.0/20"
+        peer_vpc_cidr = "172.31.0.0/16"
         peer_vpc_route_table_id = "rtb-070bb9e9616fefad4"
     }
     azs = [
@@ -44,6 +44,4 @@ config = {
         storage_type = "gp3"
         skip_final_snapshot = "true"
     }
-
-    bastion_sg_id = "sg-0d25d045761815615"
 }
