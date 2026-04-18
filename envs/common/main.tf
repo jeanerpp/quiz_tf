@@ -34,10 +34,10 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# Security Group: EC2 (only from ALB)
+# Security Group: EC2 (only from ALB and bastion)
 resource "aws_security_group" "app_sg" {
   name        = "app-sg"
-  description = "Allow 80 from ALB"
+  description = "Allow 80 from ALB and SSH from bastion"
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
@@ -45,7 +45,16 @@ resource "aws_security_group" "app_sg" {
     to_port         = 80
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_sg.id]
+    description     = "Allow HTTP from ALB"
   }
+
+  # ingress {
+  #   from_port       = 22
+  #   to_port         = 22
+  #   protocol        = "tcp"
+  #   security_groups = [var.config.bastion_sg_id]
+  #   description     = "Allow SSH from bastion"
+  # }
 
   egress {
     from_port   = 0
@@ -134,6 +143,8 @@ module "computing" {
   asg_desired_capacity = var.config.ec2.asg_desired_capacity
   asg_min_size = var.config.ec2.asg_min_size
   asg_max_size = var.config.ec2.asg_max_size
+
+  ssh_key_name = var.config.ec2.ssh_key_name
 }
 
 

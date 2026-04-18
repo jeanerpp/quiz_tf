@@ -29,6 +29,7 @@ variable "config" {
       asg_desired_capacity = number
       asg_min_size = number
       asg_max_size = number
+      ssh_key_name = string
     })
 
     # Database credentials for the data module.
@@ -40,6 +41,8 @@ variable "config" {
       storage_type = string
       skip_final_snapshot = string
     })
+
+    bastion_sg_id = string
   })
   description = "Configuration for the deployment"
 }

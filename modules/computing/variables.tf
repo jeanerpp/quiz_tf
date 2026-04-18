@@ -68,3 +68,9 @@ variable "asg_max_size" {
   type = number
   description = "Maximum size of the Auto Scaling Group"
 }
+
+variable "ssh_key_name" {
+  # SSH key name used to access EC2 instances.
+  type = string
+  description = "SSH key name for the EC2 instances"
+}

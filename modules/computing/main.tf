@@ -60,7 +60,7 @@ resource "aws_launch_template" "app_lt" {
   image_id      = data.aws_ami.app_ami.id
   instance_type = var.ec2_instance_type
   vpc_security_group_ids = [var.app_sg_id]
-
+  key_name      = var.ssh_key_name
   
   # User data script to install nginx
   user_data = base64encode(<<-EOF
