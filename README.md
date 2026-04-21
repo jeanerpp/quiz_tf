@@ -1,4 +1,7 @@
-This terraform project implements following feature.
+This terraform project implements a multi-tier architecture, as shown below.
+<img width="955" height="725" alt="image" src="https://github.com/user-attachments/assets/2e334ab7-cbec-43a4-b982-299be13a65c2" />
+
+It has following features.
 
 Various env deployment
 ----
