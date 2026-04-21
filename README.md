@@ -31,6 +31,9 @@ VPC peering is setup between bastion and this env, so that the bastion can acces
 
 Exmaple
 ----
+Deployed Nginx service:
+<img width="1219" height="306" alt="image" src="https://github.com/user-attachments/assets/21d29a39-653c-49d8-9797-22524af7072e" />
+
 ```
 xujian@jasonpc:~/work/quiz_tf/envs/test$ terraform apply
 module.computing.data.aws_ami.app_ami: Reading...
