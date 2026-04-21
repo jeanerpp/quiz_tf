@@ -151,7 +151,7 @@ module "data" {
   data_subnet_ids = values(local.data_subnet_ids)
   data_sg_id = aws_security_group.db_sg.id
   db_username = var.config.db.username
-  db_password = var.config.db.password
+  db_password = var.db_password
   storage_type = var.config.db.storage_type
   allocated_storage = var.config.db.allocated_storage
   instance_class = var.config.db.instance_class

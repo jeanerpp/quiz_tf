@@ -39,7 +39,6 @@ variable "config" {
     # Database credentials for the data module.
     db = object({
       username = string
-      password = string
       instance_class = string
       allocated_storage = number
       storage_type = string
@@ -47,4 +46,10 @@ variable "config" {
     })
   })
   description = "Configuration for the deployment"
+}
+
+variable "db_password" {
+  type      = string
+  sensitive = true
+  description = "The password for the RDS database"
 }

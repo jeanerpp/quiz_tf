@@ -38,7 +38,6 @@ config = {
     }
     db = {
         username = "admin"
-        password = "password123"
         instance_class = "db.t3.micro"
         allocated_storage = 20
         storage_type = "gp3"
