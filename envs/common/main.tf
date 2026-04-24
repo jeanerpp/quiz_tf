@@ -71,8 +71,8 @@ resource "aws_security_group" "app_sg" {
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    from_port       = 80
-    to_port         = 80
+    from_port       = 8000
+    to_port         = 8000
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_sg.id]
     description     = "Allow HTTP from ALB"
@@ -177,6 +177,7 @@ module "computing" {
   asg_max_size = var.config.ec2.asg_max_size
 
   ssh_key_name = var.config.ec2.ssh_key_name
+  ec2_role_instance_profile = var.config.ec2.ec2_role_instance_profile
 }
 
 

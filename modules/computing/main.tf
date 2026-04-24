@@ -23,7 +23,7 @@ resource "aws_lb" "app_lb" {
 # Create ALB Target Group
 resource "aws_lb_target_group" "app_tg" {
   name     = "app-tg"
-  port     = 80
+  port     = 8000
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 
@@ -62,13 +62,16 @@ resource "aws_launch_template" "app_lt" {
   vpc_security_group_ids = [var.app_sg_id]
   key_name      = var.ssh_key_name
   
+  iam_instance_profile {
+    arn = var.ec2_role_instance_profile
+  }
+  
   # User data script to install nginx
   user_data = base64encode(<<-EOF
     #!/bin/bash
     apt-get update -y
-    apt-get install -y nginx
-    systemctl start nginx
-    systemctl enable nginx
+    # for python app virtual env
+    apt-get install python3.10-venv -y
     EOF
   )
 

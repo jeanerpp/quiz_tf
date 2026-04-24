@@ -74,3 +74,8 @@ variable "ssh_key_name" {
   type = string
   description = "SSH key name for the EC2 instances"
 }
+
+variable "ec2_role_instance_profile" {
+  type = string
+  description = "IAM role ARN for S3 read access"
+}

@@ -35,6 +35,7 @@ config = {
         asg_min_size = 2
         asg_max_size = 2
         ssh_key_name = "bastion"
+        ec2_role_instance_profile = "arn:aws:iam::702536396247:instance-profile/S3Readonly"
     }
     db = {
         username = "admin"

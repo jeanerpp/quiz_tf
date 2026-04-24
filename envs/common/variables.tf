@@ -34,6 +34,7 @@ variable "config" {
       asg_min_size = number
       asg_max_size = number
       ssh_key_name = string
+      ec2_role_instance_profile = string
     })
 
     # Database credentials for the data module.
