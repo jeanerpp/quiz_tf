@@ -183,3 +183,23 @@ module "computing" {
 output "app_lb_url" {
   value = "http://${module.computing.app_lb_dns}"
 }
+
+output "db_endpoint" {
+  description = "RDS instance endpoint"
+  value       = module.data.db_endpoint
+}
+
+output "db_port" {
+  description = "RDS instance port"
+  value       = module.data.db_port
+}
+
+output "db_name" {
+  description = "Database name"
+  value       = module.data.db_name
+}
+
+output "db_username" {
+  description = "Database username"
+  value       = module.data.db_username
+}

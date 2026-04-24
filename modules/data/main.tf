@@ -13,6 +13,8 @@ resource "aws_db_instance" "app_db" {
   engine_version         = "8.0"
   instance_class         = var.instance_class
   
+  db_name                = "quiz"
+
   # storage configuration
   allocated_storage      = var.allocated_storage
   storage_type           = var.storage_type
@@ -32,4 +34,25 @@ resource "aws_db_instance" "app_db" {
   
   # tags
   tags = var.tags
+}
+
+# Output RDS connection information
+output "db_endpoint" {
+  description = "RDS instance endpoint"
+  value       = aws_db_instance.app_db.endpoint
+}
+
+output "db_port" {
+  description = "RDS instance port"
+  value       = aws_db_instance.app_db.port
+}
+
+output "db_name" {
+  description = "Database name"
+  value       = aws_db_instance.app_db.db_name
+}
+
+output "db_username" {
+  description = "Database username"
+  value       = aws_db_instance.app_db.username
 }
