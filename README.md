@@ -29,8 +29,11 @@ The project can be deployed in multiple availability zones, which can be configu
 
 App deployment
 ----
-Besides infra deployment, a bastion EC2 instance can be used to deploy the app to this env.
-VPC peering is setup between bastion and this env, so that the bastion can access this env.
+A bastion EC2 instance is setup as Harness delegate for following purposes:
+- deploy infrastucture, with IAM role for AWS permissions.
+- build app and upload artifact to S3.
+- download artifacts from S3 to EC2 and deploy app.
+- debug app via VPC peering connection.
 
 Exmaple
 ----
