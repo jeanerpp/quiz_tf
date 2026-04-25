@@ -1,7 +1,10 @@
 This terraform project implements a multi-tier architecture, as shown below.
 <img width="974" height="685" alt="image" src="https://github.com/user-attachments/assets/57cd0294-def9-4075-8b57-0d812f948d3f" />
 
-It has following features.
+Harness pipelines for infra and app deployments are at https://github.com/jeanerpp/harness_deploy.
+Django application is at https://github.com/jeanerpp/quiz_app.
+
+The demo has following features.
 
 Various env deployment
 ----
