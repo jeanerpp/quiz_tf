@@ -37,8 +37,8 @@ A bastion EC2 instance is setup as Harness delegate for following purposes:
 
 Exmaple
 ----
-Deployed Nginx service:
-<img width="1219" height="306" alt="image" src="https://github.com/user-attachments/assets/21d29a39-653c-49d8-9797-22524af7072e" />
+Deployed service at http://app-alb-1183314719.ap-northeast-1.elb.amazonaws.com/count. It displays a counter value which increases by 1 each time it is accessed. It has Django frontend and RDS/Mysql backend DB.
+<img width="321" height="179" alt="image" src="https://github.com/user-attachments/assets/c8a36002-fb3f-4d15-9ff8-50b671f265dc" />
 
 ```
 xujian@jasonpc:~/work/quiz_tf/envs/test$ terraform apply
