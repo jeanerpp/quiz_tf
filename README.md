@@ -1,5 +1,5 @@
 This terraform project implements a multi-tier architecture, as shown below.
-<img width="955" height="725" alt="image" src="https://github.com/user-attachments/assets/2e334ab7-cbec-43a4-b982-299be13a65c2" />
+<img width="974" height="685" alt="image" src="https://github.com/user-attachments/assets/57cd0294-def9-4075-8b57-0d812f948d3f" />
 
 It has following features.
 
