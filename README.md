@@ -4,34 +4,26 @@ This terraform project implements a multi-tier architecture, as shown below.
 Harness pipelines for infra and app deployments are at https://github.com/jeanerpp/harness_deploy.
 Django application is at https://github.com/jeanerpp/quiz_app.
 
-The demo has following features.
-
-Various env deployment
-----
-The project has 5 deployment envs: dev, test, prod, prod2, prod3.
-Different envs has different dirs, which can have different terraform.tfvars and backend.tf.
+It has following features.
+# Various deployment envs
+The project supports deploy with 5 envs: dev, test, prod, prod2, prod3.
+Different envs has different dirs, which can have isolated terraform.tfvars and backend.tf.
 In this way they can be isolated from each other, such tfstate and variables.
 E.g. dev env uses local backend, while test env uses S3 backend.
 
-Multi-tier architecture
-----
+# Multi-tier architecture
 The project implements multi-tier architecture.
+- load balancer, which is implemented by AWS ALB.
+- the web service, which is implemented by AWS Auto Scaling Group with python/django web service runs on EC2 instances.
+- database, which is implemented by AWS RDS instances.
 
-The project is divided into three parts:
-1. The first part is the load balancer, which is implemented by AWS ALB.
-2. The second part is the web tier, which is implemented by AWS Auto Scaling Group.
-3. The third part is the database tier, which is implemented by AWS RDS instances.
-
-Multi-region
-----
+# Multi-region
 The project can be deployed in different regions, which can be configured in the terraform.tfvars file.
 
-Multi-AZ
-----
+# Multi-AZ
 The project can be deployed in multiple availability zones, which can be configured in the terraform.tfvars file.
 
-App deployment
-----
+# App deployment
 A bastion EC2 instance is setup as Harness delegate for following purposes:
 - deploy infrastucture, with IAM role for AWS permissions.
 - build app and upload artifact to S3.
